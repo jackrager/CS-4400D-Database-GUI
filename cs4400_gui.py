@@ -48,6 +48,9 @@ class MainWindow(QMainWindow):
         self.login= QWidget()
         self.newVisitor = QWidget()
         self.newOwner = QWidget()
+        self.ownerMain = QWidget()
+        self.adminMain = QWidget()
+        self.visitMain = QWidget()
 
         #Main Stacked Widget and Adding the other Pages
         self.stacked_widget = QStackedWidget()
@@ -55,6 +58,9 @@ class MainWindow(QMainWindow):
         self.stacked_widget.addWidget(self.login)
         self.stacked_widget.addWidget(self.newVisitor)
         self.stacked_widget.addWidget(self.newOwner)
+        self.stacked_widget.addWidget(self.ownerMain)
+        self.stacked_widget.addWidget(self.adminMain)
+        self.stacked_widget.addWidget(Self.visitMain)
 
         #Initiate the Login Screen
         self.setCentralWidget(self.stacked_widget)
@@ -203,13 +209,41 @@ class MainWindow(QMainWindow):
         pass
 
     def owner_main(self):
-        pass
+        self.stacked_widget.setCurrentIndex(3)
+        self.ownerMainT = QVBoxLayout()
+
+    def admin_main(self):
+        self.stacked_widget.setCurrentIndex(4) 
+        self.adminMainT = QVBoxLayout()
+        self.adminMainT.addWidget((QLabel("Welcome")))
+        self.aViewVisit = QPushButton("View Visitors List")
+        self.adminMainT.addWidget(self.aViewVisit)
+        #connect
+        self.aViewOwner = QPushButton("View Owners List")
+        self.adminMainT.addWidget(self.aViewOwner)
+        #connect
+        self.aViewConfirmed = QPushButton("View Confirmed Properties")
+        self.adminMainT.addWidget(self.aViewConfirmed)
+        #connect
+        self.aViewUnconfirmed = QPushButton("View Unconfirmed Properties")
+        self.adminMainT.addWidget(self.aViewUnconfirmed)
+        #connect
+        self.aViewApproved = QPushButton("View Approved Animals and Crops")
+        self.adminMainT.addWidget(self.aViewApproved)
+        #connect
+        self.aViewPending = QPushButton("View Pending Animals and Crops")
+        self.adminMainT.addWidget(self.aViewVisit)
+        #connect
+
+    def visitor_main(self):
+        self.stacked_widget.setCurrentIndex(5)
+        self.visitMainT = QVBoxLayout()
 
     def add_property(self):
         #mostly the same as new owner
         pass
 
-    def visitor_main(self):
+    def new_thing(self):
         pass
 
 
