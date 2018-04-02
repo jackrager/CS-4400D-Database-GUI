@@ -1,4 +1,4 @@
-import sqlite3 as sql
+import pymysql as sql
 import hashlib
 import uuid
 import sys
