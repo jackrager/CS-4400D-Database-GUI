@@ -60,7 +60,7 @@ class MainWindow(QMainWindow):
         self.stacked_widget.addWidget(self.newOwner)
         self.stacked_widget.addWidget(self.ownerMain)
         self.stacked_widget.addWidget(self.adminMain)
-        self.stacked_widget.addWidget(Self.visitMain)
+        self.stacked_widget.addWidget(self.visitMain)
 
         #Initiate the Login Screen
         self.setCentralWidget(self.stacked_widget)
