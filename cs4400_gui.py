@@ -48,9 +48,25 @@ class MainWindow(QMainWindow):
         self.login= QWidget()
         self.newVisitor = QWidget()
         self.newOwner = QWidget()
+
         self.ownerMain = QWidget()
+        self.otherOProp = QWidget()
+        self.otherOPropDetail = QWidget()
+        self.oPropManage = QWidget()
+        self.oPropAdd = QWidget()
+
         self.adminMain = QWidget()
+        self.aUnconfirmed = QWidget()
+        self.aManage = QWidget()
+        self.aConfirmed = QWidget()
+        self.aOwner = QWidget()
+        self.aVisitor = QWidget()
+        self.aApproved = QWidget()
+        self.aPending = QWidget()
+
         self.visitMain = QWidget()
+        self.vPropDetail = QWidget()
+        self.vVisitHist = QWidget()
 
         #Main Stacked Widget and Adding the other Pages
         self.stacked_widget = QStackedWidget()
@@ -59,12 +75,28 @@ class MainWindow(QMainWindow):
         self.stacked_widget.addWidget(self.newVisitor)
         self.stacked_widget.addWidget(self.newOwner)
         self.stacked_widget.addWidget(self.ownerMain)
+        self.stacked_widget.addWidget(self.otherOProp)
+        self.stacked_widget.addWidget(self.otherOPropDetail)
+        self.stacked_widget.addWidget(self.oPropManage)
+        self.stacked_widget.addWidget(self.oPropAdd)
         self.stacked_widget.addWidget(self.adminMain)
+        self.stacked_widget.addWidget(self.aUnconfirmed)
+        self.stacked_widget.addWidget(self.aManage)
+        self.stacked_widget.addWidget(self.aConfirmed)
+        self.stacked_widget.addWidget(self.aOwner)
+        self.stacked_widget.addWidget(self.aVisitor)
+        self.stacked_widget.addWidget(self.aApproved)
+        self.stacked_widget.addWidget(self.aPending)
         self.stacked_widget.addWidget(self.visitMain)
+        self.stacked_widget.addWidget(self.vPropDetail)
+        self.stacked_widget.addWidget(self.vVisitHist)
 
         #Initiate the Login Screen
         self.setCentralWidget(self.stacked_widget)
         self.login_screen()
+
+    def cancel(self):
+        self.stacked_widget.setCurrentIndex(0)
 
     def login_screen(self):
         self.stacked_widget.setCurrentIndex(0)
@@ -155,8 +187,8 @@ class MainWindow(QMainWindow):
         self.nownerT.addLayout(self.nownerC)
         self.nownerPR = QHBoxLayout()
         self.nownerPR.addWidget(QLabel("Property Name:*"))
-        self.ownerprAdd = QLineEdit()
-        self.nownerPR.addWidget(self.ownerprAdd)
+        self.ownerprName = QLineEdit()
+        self.nownerPR.addWidget(self.ownerprName)
         self.nownerT.addLayout(self.nownerPR)
         self.nownerA = QHBoxLayout()
         self.nownerA.addWidget(QLabel("Street Address:*"))
@@ -201,50 +233,131 @@ class MainWindow(QMainWindow):
         self.nownerR.addWidget(self.nownerCB)
         self.nownerT.addLayout(self.nownerR)
 
-
-    def cancel(self):
-        self.stacked_widget.setCurrentIndex(0)
-
-    def hash_password(self):
-        pass
-
     def owner_main(self):
         self.stacked_widget.setCurrentIndex(3)
         self.ownerMainT = QVBoxLayout()
 
+    def other_o_prop(self):
+        self.stacked_widget.setCurrentIndex(4)
+
+    def other_o_prop_detail(self):
+        self.stacked_widget.setCurrentIndex(5)
+
+    def o_prop_manage(self):
+        self.stacked_widget.setCurrentIndex(6)
+
+    def o_prop_add(self):
+        self.stacked_widget.setCurrentIndex(7)
+
+        self.apropT = QVBoxLayout()
+        self.addProp.setLayout(self.apropT)
+
+        self.apropPR = QHBoxLayout()
+        self.apropPR.addWidget(QLabel("Property Name:*"))
+        self.propName = QLineEdit()
+        self.apropPR.addWidget(self.propName)
+        self.apropT.addLayout(self.apropPR)
+
+        self.apropA = QHBoxLayout()
+        self.apropA.addWidget(QLabel("Street Address:*"))
+        self.propaAdd = QLineEdit()
+        self.npropA.addWidget(self.propaAdd)
+        self.npropT.addLayout(self.npropA)
+
+        self.npropCZA = QHBoxLayout()
+        self.npropCZA.addWidget(QLabel("City:*"))
+        self.npropCI = QLineEdit()
+        self.npropCZA.addWidget(self.npropCI)
+        self.npropCZA.addWidget(QLabel("Zip:*"))
+        self.npropZ = QLineEdit()
+        self.npropCZA.addWidget(self.npropZ)
+        self.npropCZA.addWidget(QLabel("Acres:*"))
+        self.npropAC = QLineEdit()
+        self.npropCZA.addWidget(self.npropAC)
+        self.npropT.addLayout(self.npropCZA)
+
+        self.npropTPC = QHBoxLayout()
+        self.npropTPC.addWidget(QLabel("Property Type:*"))
+        self.npropTY = QComboBox()
+        self.npropTPC.addWidget(self.npropTY)
+        self.npropTPC.addWidget(QLabel("Public:*"))
+        self.npropPU = QComboBox()
+        self.npropTPC.addWidget(self.npropPU)
+        self.npropTPC.addWidget(QLabel("Commercial:*"))
+        self.npropCO = QComboBox()
+        self.npropTPC.addWidget(self.npropCO)
+        self.npropT.addLayout(self.npropTPC)
+
+        self.npropANCR = QHBoxLayout()
+        self.npropANCR.addWidget(QLabel("Animal:*"))
+        self.npropAN = QComboBox()
+        self.npropANCR.addWidget(self.npropAN)
+        self.npropANCR.addWidget(QLabel("Crop:*"))
+        self.npropCR = QComboBox()
+        self.npropANCR.addWidget(self.npropCR)
+        self.npropT.addLayout(self.npropANCR)
+
+        self.npropR = QHBoxLayout()
+        self.npropADB = QPushButton("Add Property")
+        self.npropCB = QPushButton("Cancel")
+        self.npropCB.clicked.connect(self.cancel)
+        self.npropR.addWidget(self.npropADB)
+        self.npropR.addWidget(self.npropCB)
+        self.npropT.addLayout(self.npropR)
+
     def admin_main(self):
-        self.stacked_widget.setCurrentIndex(4) 
+        self.stacked_widget.setCurrentIndex(8) 
         self.adminMainT = QVBoxLayout()
         self.adminMainT.addWidget((QLabel("Welcome")))
         self.aViewVisit = QPushButton("View Visitors List")
         self.adminMainT.addWidget(self.aViewVisit)
-        #connect
+        self.aViewVisit.clicked.connect(self.a_visitor())
         self.aViewOwner = QPushButton("View Owners List")
         self.adminMainT.addWidget(self.aViewOwner)
-        #connect
+        self.aViewOwner.clicked.connect(self.a_owner())
         self.aViewConfirmed = QPushButton("View Confirmed Properties")
         self.adminMainT.addWidget(self.aViewConfirmed)
-        #connect
+        self.aViewConfirmed.clicked.connect(self.a_confirmed())
         self.aViewUnconfirmed = QPushButton("View Unconfirmed Properties")
         self.adminMainT.addWidget(self.aViewUnconfirmed)
-        #connect
+        self.aViewUnconfirmed.clicked.connect(self.a_unconfirmed())
         self.aViewApproved = QPushButton("View Approved Animals and Crops")
         self.adminMainT.addWidget(self.aViewApproved)
-        #connect
+        self.aViewApproved.clicked.connect(self.a_approved())
         self.aViewPending = QPushButton("View Pending Animals and Crops")
-        self.adminMainT.addWidget(self.aViewVisit)
-        #connect
+        self.adminMainT.addWidget(self.aViewPending)
+        self.aViewPending.clicked.connect(self.a_pending())
+
+    def a_unconfirmed(self):
+        self.stacked_widget.setCurrentIndex(9)
+
+    def a_manage(self):
+        self.stacked_widget.setCurrentIndex(10)
+
+    def a_confirmed(self):
+        self.stacked_widget.setCurrentIndex(11)
+
+    def a_owner(self):
+        self.stacked_widget.setCurrentIndex(12)
+
+    def a_visitor(self):
+        self.stacked_widget.setCurrentIndex(13)
+
+    def a_pending(self):
+        self.stacked_widget.setCurrentIndex(14)
+
+    def a_approved(self):
+        self.stacked_widget.setCurrentIndex(15)
 
     def visitor_main(self):
-        self.stacked_widget.setCurrentIndex(5)
+        self.stacked_widget.setCurrentIndex(16)
         self.visitMainT = QVBoxLayout()
 
-    def add_property(self):
-        #mostly the same as new owner
-        pass
+    def v_prop_detail(self):
+        self.stacked_widget.setCurrentIndex(17)
 
-    def new_thing(self):
-        pass
+    def v_visit_hist(self):
+        self.stacked_widget.setCurrentIndex(18)
 
 
 if __name__ == '__main__':
