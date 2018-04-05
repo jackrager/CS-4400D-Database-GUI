@@ -44,6 +44,10 @@ class MainWindow(QMainWindow):
         left, top, width, height = 0, 700, 500, 500
         self.setGeometry(left, top, width, height)
 
+        connection =  sql.connect(host="academic-mysql.cc.gatech.edu",user="cs4400_team_18",password="KD8uc5p2", 
+            db="cs4400_team_18",charset="utf8mb4",cursorclass=sql.cursors.DictCursor)
+        cursor = connection.cursor()
+
         #Different Page Widgets
         self.login= QWidget()
         self.newVisitor = QWidget()
@@ -124,6 +128,7 @@ class MainWindow(QMainWindow):
         self.gloginL = QPushButton("Login")
         self.gloginT.addWidget(self.gloginL)
         self.gloginT.addLayout(self.gloginN)
+        #
 
     def new_visitor(self):
         self.stacked_widget.setCurrentIndex(1) 
@@ -233,9 +238,36 @@ class MainWindow(QMainWindow):
         self.nownerR.addWidget(self.nownerCB)
         self.nownerT.addLayout(self.nownerR)
 
+        #c.execute('insert into user values (?,?,?,?)', (self.owneruAdd.text(), self.ownereAdd.text(), self.ownerpAdd.text(), self.TYPE.text()))
+
+        #c.execute('insert into project values (?,?,?,?,?,?,?,?)', (self..text(), self.sicadd.text(), self.nameadd.text(), self.addr1add.text(),
+                #self.addr2add.text(), self.cityadd.text(), self.stateadd.text(), int(self.zipadd.text())))
+
     def owner_main(self):
         self.stacked_widget.setCurrentIndex(3)
         self.ownerMainT = QVBoxLayout()
+        self.ownerMainT.addWidget(QLabel("Welcome"))
+        self.ownerBOT = QHoxLayout()
+        self.ownerMainT.addLayout(self.ownerBOT)
+
+        self.ownerMainT.addWidget(QLabel("Your Properties"))
+        
+        self.ownerSEAR = QVBoxLayout()
+        self.ownerSearch = QComboBox()
+        self.ownerSearchInp = QLineEdit()
+        self.ownerSEAR.addWidget(self.ownerSearch)
+        self.ownerSEAR.addWidget(self.ownerSearchInp)
+        self.ownerBOT.addLayout(self.ownerSEAR)
+
+        self.ownerBUT = QVBoxLayout()
+        self.ownerManageBut = QPushButton("Manage Property")
+        self.ownerAddBut = QPushButton("Add Property")
+        self.ownerViewBut = QPushButton("View Other Properties")
+        self.ownerBOT.addLayout(self.ownerBUT)
+
+        self.ownerLogOut = QPushButton()
+        self.ownerBOT.addWidget(self.ownerLogOut)
+        self.ownerLogOut.clicked.connect(self.cancel())
 
     def other_o_prop(self):
         self.stacked_widget.setCurrentIndex(4)
