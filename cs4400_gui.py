@@ -44,9 +44,9 @@ class MainWindow(QMainWindow):
         left, top, width, height = 0, 700, 500, 500
         self.setGeometry(left, top, width, height)
 
-        connection =  sql.connect(host="academic-mysql.cc.gatech.edu",user="cs4400_team_18",password="KD8uc5p2", 
+        self.connection =  sql.connect(host="academic-mysql.cc.gatech.edu",user="cs4400_team_18", password="KD8uc5p2", 
             db="cs4400_team_18",charset="utf8mb4",cursorclass=sql.cursors.DictCursor)
-        cursor = connection.cursor()
+        self.c = self.connection.cursor()
 
         #Different Page Widgets
         self.login= QWidget()
@@ -98,7 +98,7 @@ class MainWindow(QMainWindow):
         #Initiate the Login Screen
         self.setCentralWidget(self.stacked_widget)
         self.login_screen()
-
+        
     def cancel(self):
         self.stacked_widget.setCurrentIndex(0)
 
@@ -129,6 +129,14 @@ class MainWindow(QMainWindow):
         self.gloginT.addWidget(self.gloginL)
         self.gloginT.addLayout(self.gloginN)
         #
+
+    def login_execute(self):
+        self.c.execute("select username, password from user")
+        up = self.c.fetchall()
+        for each in up:
+            if self.
+
+        self.c.close()
 
     def new_visitor(self):
         self.stacked_widget.setCurrentIndex(1) 
@@ -242,6 +250,8 @@ class MainWindow(QMainWindow):
 
         #c.execute('insert into project values (?,?,?,?,?,?,?,?)', (self..text(), self.sicadd.text(), self.nameadd.text(), self.addr1add.text(),
                 #self.addr2add.text(), self.cityadd.text(), self.stateadd.text(), int(self.zipadd.text())))
+
+        #c.execute("select company.name from company join sector using(sic) where sector.name = (?)", (sname,))
 
     def owner_main(self):
         self.stacked_widget.setCurrentIndex(3)
