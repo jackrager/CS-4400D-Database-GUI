@@ -126,15 +126,17 @@ class MainWindow(QMainWindow):
         self.gloginT.addLayout(self.gloginE)
         self.gloginT.addLayout(self.gloginP)
         self.gloginL = QPushButton("Login")
+        self.gloginL.clicked.connect(self.login_execute)
         self.gloginT.addWidget(self.gloginL)
         self.gloginT.addLayout(self.gloginN)
         #
 
     def login_execute(self):
-        self.c.execute("select username, password from user")
+        self.c.execute("select Email, Password from User")
         up = self.c.fetchall()
         for each in up:
-            if self.
+            if self.emailAdd == each[0][0] and self.passAdd == each[0][1]:
+                self.stacked_widget.setCurrentIndex(3)
 
         self.c.close()
 
