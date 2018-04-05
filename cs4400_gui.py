@@ -135,7 +135,7 @@ class MainWindow(QMainWindow):
         self.c.execute("select Email, Password from User")
         up = self.c.fetchall()
         for each in up:
-            if self.emailAdd == each[0][0] and self.passAdd == each[0][1]:
+            if (self.emailAdd.text() == each['Email'] and self.passAdd.text() == each['Password']):
                 self.stacked_widget.setCurrentIndex(3)
 
         self.c.close()
